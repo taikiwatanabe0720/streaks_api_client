@@ -1,10 +1,10 @@
-interface Media {
-}
+import { MediaType } from "../types/mediaType";
 declare class MediaClient {
     private client;
     private projectId;
     private apiKey;
-    constructor(projectId: string, apiKey: string);
-    getMedia(mediaId: string): Promise<Media>;
+    constructor(apiCredentials: any);
+    getMedia(mediaId: string): Promise<MediaType>;
+    updateMedia(mediaId: string, params: any): Promise<MediaType>;
 }
 export default MediaClient;

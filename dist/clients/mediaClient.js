@@ -15,16 +15,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const settings_1 = require("../settings/settings");
 class MediaClient {
-    constructor(projectId, apiKey) {
+    constructor(apiCredentials) {
         this.client = axios_1.default.create({
             baseURL: settings_1.baseURL,
         });
-        this.projectId = projectId;
-        this.apiKey = apiKey;
+        this.projectId = apiCredentials.projectId;
+        this.apiKey = apiCredentials.apiKey;
     }
     getMedia(mediaId) {
         return __awaiter(this, void 0, void 0, function* () {
             const response = yield this.client.get(`/v1/projects/${this.projectId}/medias/${mediaId}`, { headers: { 'X-Streaks-Api-Key': this.apiKey, "Content-Type": "application/json" } });
+            return response.data;
+        });
+    }
+    updateMedia(mediaId, params) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.client.put(`/v1/projects/${this.projectId}/medias/${mediaId}`, params, { headers: { 'X-Streaks-Api-Key': this.apiKey, "Content-Type": "application/json" } });
             return response.data;
         });
     }

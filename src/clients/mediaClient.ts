@@ -22,6 +22,11 @@ class MediaClient {
     const response = await this.client.get<MediaType>(`/v1/projects/${this.projectId}/medias/${mediaId}`, {headers: { 'X-Streaks-Api-Key': this.apiKey, "Content-Type": "application/json" }});
     return response.data;
   }
+
+  async updateMedia(mediaId: string, params: any): Promise<MediaType> {
+    const response = await this.client.put<MediaType>(`/v1/projects/${this.projectId}/medias/${mediaId}`, params, {headers: { 'X-Streaks-Api-Key': this.apiKey, "Content-Type": "application/json" }});
+    return response.data;
+  }
 }
 
 export default MediaClient;
